@@ -7,15 +7,12 @@ package opentech;
 
 import clases.Persona;
 import clases.Vehiculo;
-import controladores.Controlador;
 import controladores.Fabrica;
 import controladores.IControlador;
 import enumerados.TipoOrigen;
 import enumerados.TipoRol;
 import enumerados.TipoVehiculo;
 
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 /**

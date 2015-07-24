@@ -25,11 +25,11 @@
     <exclude name="**/.git/**"/>
     <exclude name="**/.hg/**"/>
     <exclude name="**/.svn/**"/>
+    <exclude name="**/.tox/**"/>
     <exclude name="**/CVS/**"/>
     <exclude name="**/RCS/**"/>
     <exclude name="**/SCCS/**"/>
     <exclude name="**/__pycache__/**"/>
-    <exclude name="**/.tox/**"/>
     <exclude name="**/_svn/**"/>
     <exclude name="**/rcs/**"/>
     <exclude name="**/vssver.scc/**"/>
@@ -99,8 +99,8 @@
   
   <property name="compiler.args.opentech" value="-encoding UTF-8 -source 1.7 ${compiler.args}"/>
   
-  <property name="opentech.output.dir" value="undefined"/>
-  <property name="opentech.testoutput.dir" value="undefined"/>
+  <property name="opentech.output.dir" value="${module.opentech.basedir}/out"/>
+  <property name="opentech.testoutput.dir" value="${module.opentech.basedir}/out"/>
   
   <path id="opentech.module.bootclasspath">
     <!-- Paths to be included in compilation bootclasspath -->
@@ -110,13 +110,24 @@
     <path refid="${module.jdk.classpath.opentech}"/>
   </path>
   
-  <path id="opentech.runtime.production.module.classpath"/>
+  <path id="opentech.runtime.production.module.classpath">
+    <pathelement location="${opentech.output.dir}"/>
+  </path>
   
   <path id="opentech.module.classpath">
     <path refid="${module.jdk.classpath.opentech}"/>
+    <pathelement location="${opentech.output.dir}"/>
+    <pathelement location="${idea.home}/lib/hamcrest-core-1.3.jar"/>
+    <pathelement location="${idea.home}/lib/hamcrest-library-1.3.jar"/>
+    <pathelement location="${idea.home}/lib/junit-4.11.jar"/>
   </path>
   
-  <path id="opentech.runtime.module.classpath"/>
+  <path id="opentech.runtime.module.classpath">
+    <pathelement location="${opentech.output.dir}"/>
+    <pathelement location="${idea.home}/lib/hamcrest-core-1.3.jar"/>
+    <pathelement location="${idea.home}/lib/hamcrest-library-1.3.jar"/>
+    <pathelement location="${idea.home}/lib/junit-4.11.jar"/>
+  </path>
   
   
   <patternset id="excluded.from.module.opentech">
@@ -130,6 +141,12 @@
   <path id="opentech.module.sourcepath">
     <dirset dir="${module.opentech.basedir}">
       <include name="src"/>
+    </dirset>
+  </path>
+  
+  <path id="opentech.module.test.sourcepath">
+    <dirset dir="${module.opentech.basedir}">
+      <include name="src-test"/>
     </dirset>
   </path>
   
@@ -154,7 +171,23 @@
     </copy>
   </target>
   
-  <target name="compile.module.opentech.tests" depends="compile.module.opentech.production" description="compile module OpenTech; test classes" unless="skip.tests"/>
+  <target name="compile.module.opentech.tests" depends="compile.module.opentech.production" description="compile module OpenTech; test classes" unless="skip.tests">
+    <mkdir dir="${opentech.testoutput.dir}"/>
+    <javac destdir="${opentech.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.opentech}/javac">
+      <compilerarg line="${compiler.args.opentech}"/>
+      <bootclasspath refid="opentech.module.bootclasspath"/>
+      <classpath refid="opentech.module.classpath"/>
+      <src refid="opentech.module.test.sourcepath"/>
+      <patternset refid="excluded.from.compilation.opentech"/>
+    </javac>
+    
+    <copy todir="${opentech.testoutput.dir}">
+      <fileset dir="${module.opentech.basedir}/src-test">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
   
   <target name="clean.module.opentech" description="cleanup module">
     <delete dir="${opentech.output.dir}"/>

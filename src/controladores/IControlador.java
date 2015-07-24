@@ -2,10 +2,8 @@ package controladores;
 
 import clases.Persona;
 import clases.Vehiculo;
-import enumerados.TipoOrigen;
 import enumerados.TipoRol;
-import enumerados.TipoVehiculo;
-import java.util.Date;
+
 import java.util.List;
 
 
