@@ -1,19 +1,16 @@
 <project name="test" default="test">
-    <include/>
+    <include file="opentech.xml" as="build"/>
     <target name="test">
         <delete dir="reportes/junit"/>
         <mkdir dir="reportes/junit"/>
         <junit printsummary="yes" haltonfailure="no">
             <classpath>
-                <path refid="opentech.module.production.classpath"/>
-                <path refid="opentech.runtime.production.module.classpath"/>
-                <path refid="opentech.module.classpath"/>
                 <path refid="opentech.runtime.module.classpath"/>
             </classpath>
             <batchtest todir="reportes/junit">
                 <formatter type="xml"/>
-                <fileset>
-                    <include/>
+                <fileset dir="src-test">
+                    <include name="**/*Test.java"/>
                 </fileset>
             </batchtest>
         </junit>
