@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset xmlns="http://pmd.sourceforge.net/ruleset/2.0.0" name="PMD Coding Rules from Default" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 http://pmd.sourceforge.net/ruleset_2_0_0.xsd" xsi:noNamespaceSchemaLocation="http://pmd.sourceforge.net/ruleset_2_0_0.xsd">
+  <description>These rules references were generated using QAPlug 1.3.9 and QAPlug - PMD 1.3.7</description>
+  <rule ref="rulesets/java/basic.xml/AvoidDecimalLiteralsInBigDecimalConstructor">
+    <priority>3</priority>
+  </rule>
+  <rule ref="rulesets/java/basic.xml/BigIntegerInstantiation">
+    <priority>3</priority>
+  </rule>
+  <rule ref="rulesets/java/basic.xml/UnconditionalIfStatement">
+    <priority>2</priority>
+  </rule>
+  <rule ref="rulesets/java/codesize.xml/CyclomaticComplexity">
+    <properties>
+      <property name="reportLevel" value="5" />
+    </properties>
+    <priority>3</priority>
+  </rule>
+  <rule ref="rulesets/java/controversial.xml/NullAssignment">
+    <priority>3</priority>
+  </rule>
+  <rule ref="rulesets/java/controversial.xml/UnnecessaryConstructor">
+    <priority>3</priority>
+  </rule>
+  <rule ref="rulesets/java/design.xml/CompareObjectsWithEquals">
+    <priority>3</priority>
+  </rule>
+  <rule ref="rulesets/java/design.xml/ConfusingTernary">
+    <priority>3</priority>
+  </rule>
+  <rule ref="rulesets/java/design.xml/ImmutableField">
+    <priority>3</priority>
+  </rule>
+  <rule ref="rulesets/java/design.xml/PreserveStackTrace">
+    <priority>3</priority>
+  </rule>
+  <rule ref="rulesets/java/design.xml/SimplifyBooleanExpressions">
+    <priority>3</priority>
+  </rule>
+  <rule ref="rulesets/java/design.xml/UnnecessaryLocalBeforeReturn">
+    <priority>3</priority>
+  </rule>
+  <rule ref="rulesets/java/design.xml/UseCollectionIsEmpty">
+    <priority>4</priority>
+  </rule>
+  <rule ref="rulesets/java/empty.xml/EmptyCatchBlock">
+    <priority>2</priority>
+  </rule>
+  <rule ref="rulesets/java/empty.xml/EmptyFinallyBlock">
+    <priority>2</priority>
+  </rule>
+  <rule ref="rulesets/java/empty.xml/EmptyIfStmt">
+    <priority>2</priority>
+  </rule>
+  <rule ref="rulesets/java/empty.xml/EmptyInitializer">
+    <priority>3</priority>
+  </rule>
+  <rule ref="rulesets/java/empty.xml/EmptyStatementBlock">
+    <priority>3</priority>
+  </rule>
+  <rule ref="rulesets/java/empty.xml/EmptyStatementNotInLoop">
+    <priority>3</priority>
+  </rule>
+  <rule ref="rulesets/java/empty.xml/EmptyStaticInitializer">
+    <priority>3</priority>
+  </rule>
+  <rule ref="rulesets/java/empty.xml/EmptySwitchStatements">
+    <priority>3</priority>
+  </rule>
+  <rule ref="rulesets/java/empty.xml/EmptySynchronizedBlock">
+    <priority>2</priority>
+  </rule>
+  <rule ref="rulesets/java/empty.xml/EmptyTryBlock">
+    <priority>3</priority>
+  </rule>
+  <rule ref="rulesets/java/empty.xml/EmptyWhileStmt">
+    <priority>2</priority>
+  </rule>
+  <rule ref="rulesets/java/finalizers.xml/EmptyFinalizer">
+    <priority>3</priority>
+  </rule>
+  <rule ref="rulesets/java/imports.xml/UnusedImports">
+    <priority>5</priority>
+  </rule>
+  <rule ref="rulesets/releases/41.xml/UseEqualsToCompareStrings">
+    <priority>3</priority>
+  </rule>
+  <rule ref="rulesets/java/typeresolution.xml/UnusedImports">
+    <priority>5</priority>
+  </rule>
+</ruleset>
+
