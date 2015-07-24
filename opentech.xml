@@ -100,7 +100,7 @@
   <property name="compiler.args.opentech" value="-encoding UTF-8 -source 1.7 ${compiler.args}"/>
   
   <property name="opentech.output.dir" value="${module.opentech.basedir}/out"/>
-  <property name="opentech.testoutput.dir" value="${module.opentech.basedir}/out"/>
+  <property name="opentech.testoutput.dir" value="${module.opentech.basedir}/out/test"/>
   
   <path id="opentech.module.bootclasspath">
     <!-- Paths to be included in compilation bootclasspath -->
@@ -123,6 +123,7 @@
   </path>
   
   <path id="opentech.runtime.module.classpath">
+    <pathelement location="${opentech.testoutput.dir}"/>
     <pathelement location="${opentech.output.dir}"/>
     <pathelement location="${idea.home}/lib/hamcrest-core-1.3.jar"/>
     <pathelement location="${idea.home}/lib/hamcrest-library-1.3.jar"/>
