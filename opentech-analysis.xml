@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="src-analysis" default="cpd-pmd">
-    <property name="pmd" value="PMD"/>
+    <property name="pmd" value="pmd"/>
 
     <taskdef name="cpd" classname="net.sourceforge.pmd.cpd.CPDTask">
         <classpath path="${pmd}/asm-5.0.3.jar"/>
@@ -27,7 +27,6 @@
         <classpath path="${pmd}/saxon-9.1.0.8-dom.jar"/>
         <classpath path="${pmd}/xercesImpl-2.11.0.jar"/>
         <classpath path="${pmd}/xml-apis-1.4.01.jar"/>
-        <classpath path="${pmd}/rulesets"/>
     </taskdef>
     <taskdef name="pmd" classname="net.sourceforge.pmd.ant.PMDTask">
         <classpath path="${pmd}/asm-5.0.3.jar"/>
@@ -54,21 +53,20 @@
         <classpath path="${pmd}/saxon-9.1.0.8-dom.jar"/>
         <classpath path="${pmd}/xercesImpl-2.11.0.jar"/>
         <classpath path="${pmd}/xml-apis-1.4.01.jar"/>
-        <classpath path="${pmd}/rulesets"/>
     </taskdef>
 
     <target name="cpd-pmd">
         <delete dir="reportes/pmd"/>
         <mkdir dir="reportes/pmd"/>
         <cpd minimumTokenCount="100" format="xml" outputFile="reportes/pmd/cpd.xml">
-            <fileset dir=".">
+            <fileset dir="./">
                 <include name="src/**/*.java"/>
             </fileset>
         </cpd>
         <pmd shortFilenames="true">
-            <!--<ruleset>opentech-rules.xml</ruleset>-->
+            <ruleset>pmd/rulesets/opentech.xml</ruleset>
             <formatter type="xml" toFile="reportes/pmd/pmd.xml"/>
-            <fileset dir=".">
+            <fileset dir="./">
                 <include name="src/**/*.java"/>
             </fileset>
         </pmd>
