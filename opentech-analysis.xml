@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="src-analysis" default="cpd-pmd">
+    <property name="pmd" value="PMD"/>
+
+    <taskdef name="cpd" classname="net.sourceforge.pmd.cpd.CPDTask">
+        <classpath path="${pmd}/asm-5.0.3.jar"/>
+        <classpath path="${pmd}/commons-io-2.4.jar"/>
+        <classpath path="${pmd}/commons-lang3-3.3.2.jar"/>
+        <classpath path="${pmd}/javacc-5.0.jar"/>
+        <classpath path="${pmd}/jaxen-1.1.4.jar"/>
+        <classpath path="${pmd}/jcommander-1.35.jar"/>
+        <classpath path="${pmd}/pmd-core-5.2.3.jar"/>
+        <classpath path="${pmd}/pmd-cpp-5.2.3.jar"/>
+        <classpath path="${pmd}/pmd-cs-5.2.3.jar"/>
+        <classpath path="${pmd}/pmd-fortran-5.2.3.jar"/>
+        <classpath path="${pmd}/pmd-go-5.2.3.jar"/>
+        <classpath path="${pmd}/pmd-java-5.2.3.jar"/>
+        <classpath path="${pmd}/pmd-javascript-5.2.3.jar"/>
+        <classpath path="${pmd}/pmd-jsp-5.2.3.jar"/>
+        <classpath path="${pmd}/pmd-php-5.2.3.jar"/>
+        <classpath path="${pmd}/pmd-plsql-5.2.3.jar"/>
+        <classpath path="${pmd}/pmd-ruby-5.2.3.jar"/>
+        <classpath path="${pmd}/pmd-vm-5.2.3.jar"/>
+        <classpath path="${pmd}/pmd-xml-5.2.3.jar"/>
+        <classpath path="${pmd}/rhino-1.7R4.jar"/>
+        <classpath path="${pmd}/saxon-9.1.0.8.jar"/>
+        <classpath path="${pmd}/saxon-9.1.0.8-dom.jar"/>
+        <classpath path="${pmd}/xercesImpl-2.11.0.jar"/>
+        <classpath path="${pmd}/xml-apis-1.4.01.jar"/>
+        <classpath path="${pmd}/rulesets"/>
+    </taskdef>
+    <taskdef name="pmd" classname="net.sourceforge.pmd.ant.PMDTask">
+        <classpath path="${pmd}/asm-5.0.3.jar"/>
+        <classpath path="${pmd}/commons-io-2.4.jar"/>
+        <classpath path="${pmd}/commons-lang3-3.3.2.jar"/>
+        <classpath path="${pmd}/javacc-5.0.jar"/>
+        <classpath path="${pmd}/jaxen-1.1.4.jar"/>
+        <classpath path="${pmd}/jcommander-1.35.jar"/>
+        <classpath path="${pmd}/pmd-core-5.2.3.jar"/>
+        <classpath path="${pmd}/pmd-cpp-5.2.3.jar"/>
+        <classpath path="${pmd}/pmd-cs-5.2.3.jar"/>
+        <classpath path="${pmd}/pmd-fortran-5.2.3.jar"/>
+        <classpath path="${pmd}/pmd-go-5.2.3.jar"/>
+        <classpath path="${pmd}/pmd-java-5.2.3.jar"/>
+        <classpath path="${pmd}/pmd-javascript-5.2.3.jar"/>
+        <classpath path="${pmd}/pmd-jsp-5.2.3.jar"/>
+        <classpath path="${pmd}/pmd-php-5.2.3.jar"/>
+        <classpath path="${pmd}/pmd-plsql-5.2.3.jar"/>
+        <classpath path="${pmd}/pmd-ruby-5.2.3.jar"/>
+        <classpath path="${pmd}/pmd-vm-5.2.3.jar"/>
+        <classpath path="${pmd}/pmd-xml-5.2.3.jar"/>
+        <classpath path="${pmd}/rhino-1.7R4.jar"/>
+        <classpath path="${pmd}/saxon-9.1.0.8.jar"/>
+        <classpath path="${pmd}/saxon-9.1.0.8-dom.jar"/>
+        <classpath path="${pmd}/xercesImpl-2.11.0.jar"/>
+        <classpath path="${pmd}/xml-apis-1.4.01.jar"/>
+        <classpath path="${pmd}/rulesets"/>
+    </taskdef>
+
+    <target name="cpd-pmd">
+        <delete dir="reportes/pmd"/>
+        <mkdir dir="reportes/pmd"/>
+        <cpd minimumTokenCount="100" format="xml" outputFile="reportes/pmd/cpd.xml">
+            <fileset dir=".">
+                <include name="src/**/*.java"/>
+            </fileset>
+        </cpd>
+        <pmd shortFilenames="true">
+            <!--<ruleset>opentech-rules.xml</ruleset>-->
+            <formatter type="xml" toFile="reportes/pmd/pmd.xml"/>
+            <fileset dir=".">
+                <include name="src/**/*.java"/>
+            </fileset>
+        </pmd>
+    </target>
+</project>

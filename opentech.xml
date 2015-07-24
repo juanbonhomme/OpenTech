@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="opentech" default="all">
+  
+  
+  <property file="opentech.properties"/>
+  <!-- Uncomment the following property if no tests compilation is needed -->
+  <!-- 
+  <property name="skip.tests" value="true"/>
+   -->
+  
+  <!-- Compiler options -->
+  
+  <property name="compiler.debug" value="on"/>
+  <property name="compiler.generate.no.warnings" value="off"/>
+  <property name="compiler.args" value=""/>
+  <property name="compiler.max.memory" value="700m"/>
+  <patternset id="ignored.files">
+    <exclude name="**/*.hprof/**"/>
+    <exclude name="**/*.pyc/**"/>
+    <exclude name="**/*.pyo/**"/>
+    <exclude name="**/*.rbc/**"/>
+    <exclude name="**/*~/**"/>
+    <exclude name="**/.DS_Store/**"/>
+    <exclude name="**/.bundle/**"/>
+    <exclude name="**/.git/**"/>
+    <exclude name="**/.hg/**"/>
+    <exclude name="**/.svn/**"/>
+    <exclude name="**/CVS/**"/>
+    <exclude name="**/RCS/**"/>
+    <exclude name="**/SCCS/**"/>
+    <exclude name="**/__pycache__/**"/>
+    <exclude name="**/.tox/**"/>
+    <exclude name="**/_svn/**"/>
+    <exclude name="**/rcs/**"/>
+    <exclude name="**/vssver.scc/**"/>
+    <exclude name="**/vssver2.scc/**"/>
+  </patternset>
+  <patternset id="library.patterns">
+    <include name="*.zip"/>
+    <include name="*.apk"/>
+    <include name="*.war"/>
+    <include name="*.egg"/>
+    <include name="*.ear"/>
+    <include name="*.ane"/>
+    <include name="*.swc"/>
+    <include name="*.jar"/>
+  </patternset>
+  <patternset id="compiler.resources">
+    <exclude name="**/?*.java"/>
+    <exclude name="**/?*.form"/>
+    <exclude name="**/?*.class"/>
+    <exclude name="**/?*.groovy"/>
+    <exclude name="**/?*.scala"/>
+    <exclude name="**/?*.flex"/>
+    <exclude name="**/?*.kt"/>
+    <exclude name="**/?*.clj"/>
+    <exclude name="**/?*.aj"/>
+  </patternset>
+  
+  <!-- JDK definitions -->
+  
+  <property name="jdk.bin.open-jdk-1.7" value="${jdk.home.open-jdk-1.7}/bin"/>
+  <path id="jdk.classpath.open-jdk-1.7">
+    <fileset dir="${jdk.home.open-jdk-1.7}">
+      <include name="../default-java/jre/lib/jsse.jar"/>
+      <include name="../default-java/jre/lib/javazic.jar"/>
+      <include name="../default-java/jre/lib/rhino.jar"/>
+      <include name="../default-java/jre/lib/resources.jar"/>
+      <include name="../default-java/jre/lib/compilefontconfig.jar"/>
+      <include name="../default-java/jre/lib/charsets.jar"/>
+      <include name="../default-java/jre/lib/jce.jar"/>
+      <include name="../default-java/jre/lib/rt.jar"/>
+      <include name="../default-java/jre/lib/management-agent.jar"/>
+      <include name="../default-java/jre/lib/ext/sunjce_provider.jar"/>
+      <include name="../default-java/jre/lib/ext/sunpkcs11.jar"/>
+      <include name="../default-java/jre/lib/ext/java-atk-wrapper.jar"/>
+      <include name="../default-java/jre/lib/ext/dnsns.jar"/>
+      <include name="../default-java/jre/lib/ext/localedata.jar"/>
+      <include name="../default-java/jre/lib/ext/icedtea-sound.jar"/>
+      <include name="../default-java/jre/lib/ext/zipfs.jar"/>
+    </fileset>
+  </path>
+  
+  <property name="project.jdk.home" value="${jdk.home.open-jdk-1.7}"/>
+  <property name="project.jdk.bin" value="${jdk.bin.open-jdk-1.7}"/>
+  <property name="project.jdk.classpath" value="jdk.classpath.open-jdk-1.7"/>
+  
+  <!-- Modules -->
+  
+  
+  <!-- Module OpenTech -->
+  
+  <dirname property="module.opentech.basedir" file="${ant.file}"/>
+  
+  
+  <property name="module.jdk.home.opentech" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.opentech" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.opentech" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.opentech" value="-encoding UTF-8 -source 1.7 ${compiler.args}"/>
+  
+  <property name="opentech.output.dir" value="undefined"/>
+  <property name="opentech.testoutput.dir" value="undefined"/>
+  
+  <path id="opentech.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="opentech.module.production.classpath">
+    <path refid="${module.jdk.classpath.opentech}"/>
+  </path>
+  
+  <path id="opentech.runtime.production.module.classpath"/>
+  
+  <path id="opentech.module.classpath">
+    <path refid="${module.jdk.classpath.opentech}"/>
+  </path>
+  
+  <path id="opentech.runtime.module.classpath"/>
+  
+  
+  <patternset id="excluded.from.module.opentech">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.opentech">
+    <patternset refid="excluded.from.module.opentech"/>
+  </patternset>
+  
+  <path id="opentech.module.sourcepath">
+    <dirset dir="${module.opentech.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.opentech" depends="compile.module.opentech.production,compile.module.opentech.tests" description="Compile module OpenTech"/>
+  
+  <target name="compile.module.opentech.production" description="Compile module OpenTech; production classes">
+    <mkdir dir="${opentech.output.dir}"/>
+    <javac destdir="${opentech.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.opentech}/javac">
+      <compilerarg line="${compiler.args.opentech}"/>
+      <bootclasspath refid="opentech.module.bootclasspath"/>
+      <classpath refid="opentech.module.production.classpath"/>
+      <src refid="opentech.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.opentech"/>
+    </javac>
+    
+    <copy todir="${opentech.output.dir}">
+      <fileset dir="${module.opentech.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.opentech.tests" depends="compile.module.opentech.production" description="compile module OpenTech; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.opentech" description="cleanup module">
+    <delete dir="${opentech.output.dir}"/>
+    <delete dir="${opentech.testoutput.dir}"/>
+  </target>
+  
+  <target name="init" description="Build initialization">
+    <!-- Perform any build initialization in this target -->
+  </target>
+  
+  <target name="clean" depends="clean.module.opentech" description="cleanup all"/>
+  
+  <target name="build.modules" depends="init, clean, compile.module.opentech" description="build all modules"/>
+  
+  <target name="all" depends="build.modules" description="build all"/>
+</project>
