@@ -17,7 +17,7 @@
         <delete dir="reportes/coverage"/>
         <mkdir dir="reportes/coverage"/>
         <coverage destfile="reportes/coverage/jacoco.exec">
-            <junit printsummary="yes" haltonfailure="yes" fork="true" forkmode="once">
+            <junit printsummary="yes" haltonfailure="yes" fork="true" forkmode="once" showoutput="true">
                 <classpath>
                     <path refid="opentech.runtime.module.classpath"/>
                     <pathelement location="jacoco/jacocoant.jar"/>

@@ -23,7 +23,7 @@ public class ControladorTest {
 
     @Test
     public void testListarTitulares() throws Exception {
-
+new Controlador();
     }
 
     @Test
