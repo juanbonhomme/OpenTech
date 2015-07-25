@@ -80,7 +80,7 @@
     <priority>3</priority>
   </rule>
   <rule ref="rulesets/java/imports.xml/UnusedImports">
-    <priority>5</priority>
+    <priority>2</priority>
   </rule>
   <rule ref="rulesets/releases/41.xml/UseEqualsToCompareStrings">
     <priority>3</priority>
