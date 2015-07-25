@@ -1,10 +1,10 @@
 
 package clases;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import enumerados.TipoRol;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Persona {
     private String ci;

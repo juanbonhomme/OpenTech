@@ -2,12 +2,9 @@ package controladores;
 
 import clases.Persona;
 import clases.Vehiculo;
-import enumerados.TipoOrigen;
 import enumerados.TipoRol;
-import enumerados.TipoVehiculo;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 
@@ -61,9 +58,41 @@ public class Controlador implements IControlador{
             boolean error = true;
             Persona titularAnt1 = null;
             Persona titularAnt2 = null;
-            if ((titular2 != null) && (!(vehiculo.getTitular1().getCi().equals(titular1.getCi())) && !(vehiculo.getTitular1().getCi().equals(titular2.getCi())))) {
+            if ((titular2 == null) || (vehiculo.getTitular1().getCi().equals(titular1.getCi()) || (vehiculo.getTitular1().getCi().equals(titular2.getCi())))) {
+                if (titular2 == null) { //se transfiere a un titular.
+                    //el vehiculo tenia 2 propietarios
+                    if ((vehiculo.getTitular2() == null) || (vehiculo.getTitular1().getCi().equals(titular1.getCi()) || (vehiculo.getTitular2().getCi().equals(titular2.getCi())))) {
+                        if ((vehiculo.getTitular2() == null) && (!(vehiculo.getTitular1().getCi().equals(titular1.getCi())) && !(vehiculo.getTitular1().getCi().equals(titular1.getCi())))) {
+                            titularAnt1 = vehiculo.getTitular1();
+                            bajaVehiculo(titularAnt1, vehiculo);
+                            vehiculo.setTitular1(titular1);
+                            vehiculo.setTitular2(null);
+                            error = false;
+
+                        }
+                    } else {
+                        titularAnt1 = vehiculo.getTitular1();
+                        titularAnt2 = vehiculo.getTitular2();
+                        bajaVehiculo(titularAnt1, vehiculo);
+                        bajaVehiculo(titularAnt2, vehiculo);
+                        vehiculo.setTitular1(titular1);
+                        vehiculo.setTitular2(null);
+                        error = false;
+
+                    }
+                }
+            } else {
                 //se transfiere el vehiculo a 2 titulares
-                if ((vehiculo.getTitular2() != null) && (!(vehiculo.getTitular2().getCi().equals(titular1.getCi())) && !(vehiculo.getTitular2().getCi().equals(titular2.getCi())))) {
+                if ((vehiculo.getTitular2() == null) || (vehiculo.getTitular2().getCi().equals(titular1.getCi()) || (vehiculo.getTitular2().getCi().equals(titular2.getCi())))) {
+                    if ((vehiculo.getTitular2() == null) && (!(vehiculo.getTitular1().getCi().equals(titular1.getCi()))) && (!(vehiculo.getTitular1().getCi().equals(titular2.getCi())))) {
+                        titularAnt1 = vehiculo.getTitular1();
+                        bajaVehiculo(titularAnt1, vehiculo);
+                        vehiculo.setTitular1(titular1);
+                        vehiculo.setTitular2(titular2);
+                        error = false;
+
+                    }
+                } else {
                     //el vehiculo tenia 2 propietarios
                     titularAnt1 = vehiculo.getTitular1();
                     titularAnt2 = vehiculo.getTitular2();
@@ -71,32 +100,6 @@ public class Controlador implements IControlador{
                     vehiculo.setTitular2(titular2);
                     bajaVehiculo(titularAnt1, vehiculo);
                     bajaVehiculo(titularAnt2, vehiculo);
-                    error = false;
-
-                } else if ((vehiculo.getTitular2() == null) && (!(vehiculo.getTitular1().getCi().equals(titular1.getCi()))) && (!(vehiculo.getTitular1().getCi().equals(titular2.getCi())))) {
-                    titularAnt1 = vehiculo.getTitular1();
-                    bajaVehiculo(titularAnt1, vehiculo);
-                    vehiculo.setTitular1(titular1);
-                    vehiculo.setTitular2(titular2);
-                    error = false;
-
-                }
-            } else if (titular2 == null) { //se transfiere a un titular.
-                //el vehiculo tenia 2 propietarios
-                if ((vehiculo.getTitular2() != null) && (!(vehiculo.getTitular1().getCi().equals(titular1.getCi())) && !(vehiculo.getTitular2().getCi().equals(titular2.getCi())))) {
-                    titularAnt1 = vehiculo.getTitular1();
-                    titularAnt2 = vehiculo.getTitular2();
-                    bajaVehiculo(titularAnt1, vehiculo);
-                    bajaVehiculo(titularAnt2, vehiculo);
-                    vehiculo.setTitular1(titular1);
-                    vehiculo.setTitular2(null);
-                    error = false;
-
-                } else if ((vehiculo.getTitular2() == null) && (!(vehiculo.getTitular1().getCi().equals(titular1.getCi())) && !(vehiculo.getTitular1().getCi().equals(titular1.getCi())))) {
-                    titularAnt1 = vehiculo.getTitular1();
-                    bajaVehiculo(titularAnt1, vehiculo);
-                    vehiculo.setTitular1(titular1);
-                    vehiculo.setTitular2(null);
                     error = false;
 
                 }

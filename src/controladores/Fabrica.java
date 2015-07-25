@@ -15,7 +15,6 @@ public class Fabrica {
     }
     
     public IControlador getIControlador(){
-       IControlador  c = Controlador.getInstance();
-       return c;
+        return Controlador.getInstance();
     }
 }
