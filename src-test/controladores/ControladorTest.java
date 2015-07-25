@@ -1,5 +1,7 @@
 package controladores;
 
+import clases.Persona;
+import enumerados.TipoRol;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -23,7 +25,7 @@ public class ControladorTest {
 
     @Test
     public void testListarTitulares() throws Exception {
-new Controlador();
+new Controlador().altaPersonaSistema(new Persona("","","","","", TipoRol.Administrador,""));
     }
 
     @Test
