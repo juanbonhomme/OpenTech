@@ -20,6 +20,8 @@
             <junit printsummary="yes" haltonfailure="yes" fork="true" forkmode="once" showoutput="true">
                 <classpath>
                     <path refid="opentech.runtime.module.classpath"/>
+                    <pathelement location="/usr/share/ant/lib/hamcrest-core-1.3.jar"/>
+                    <pathelement location="/usr/share/ant/lib/hamcrest-library-1.3.jar"/>
                     <pathelement location="jacoco/jacocoant.jar"/>
                 </classpath>
                 <batchtest todir="reportes/junit">
